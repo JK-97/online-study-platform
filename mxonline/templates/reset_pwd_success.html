@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>密码修改成功</title>
+</head>
+<body>
+<p>密码修改成功,3秒后跳转</p>
+<script language="javascript" type="text/javascript">
+setTimeout(function(){
+    window.location.href="{% url 'login' %}";
+},2000);
+
+</script>
+</body>
+</html>

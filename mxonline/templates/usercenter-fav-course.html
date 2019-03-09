@@ -1,0 +1,58 @@
+
+{% extends 'usercenterbase.html' %}
+{% block right_content %}
+
+
+    <div class="right" >
+            <div class="personal_des Releasecont">
+                <div class="head">
+                    <h1>我的收藏</h1>
+                </div>
+            </div>
+            <div class="personal_des permessage">
+                <div class="head">
+                    <ul class="tab_header messagehead">
+                        <li  {% if request.path|slice:'19' == '/usercenter/fav_org' %}
+                        class="active"
+                        {% endif %} ><a href="{% url 'usercenter:fav_org' user.id %}">课程机构</a> </li>
+                        <li {% if request.path|slice:'23' == '/usercenter/fav_teacher' %}
+                        class="active"
+                        {% endif %} ><a href="{% url 'usercenter:fav_teacher' user.id %}">授课教师 </a></li>
+                        <li {% if request.path|slice:'22' == '/usercenter/fav_course' %}
+                        class="active"
+                        {% endif %} ><a href="{% url 'usercenter:fav_course' user.id %}">公开课程</a></li>
+                    </ul>
+
+                </div>
+                <div class="companycenter">
+                    <div class="group_list brief">
+{% for course in courses %}
+
+                        <div class="module1_5 box">
+                            <a href="{% url 'course:detail' course.id %}">
+                                <img width="214" height="190" src="{{ MEDIA_URL }}{{ course.image }}"/>
+                            </a>
+                            <div class="des">
+                                <a href="{% url 'course:detail' course.id %}"><h2>{{ course.name }}</h2></a>
+                                <span class="fl">时长：<i class="key">{{ course.learn_time }}</i></span>
+                                <span class="fr">学习人数：{{ course.students }}</span>
+                            </div>
+                            <div class="bottom">
+                                <span class="fl">{{ course.org }}</span>
+                                <span class="delete-group fr jsDeleteFav_course" data-favid="{{ course.id }}"></span>
+                            </div>
+                        </div>
+
+{% endfor %}
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+{% endblock %}
+
+
